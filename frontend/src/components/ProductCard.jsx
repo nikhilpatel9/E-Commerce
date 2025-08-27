@@ -2,12 +2,11 @@ import { Link } from 'react-router-dom';
 import { useCart } from '../hooks/useCart';
 import { formatPrice, formatRating, truncateText } from '../utils/validation';
 
-// Product card component for displaying product information
 const ProductCard = ({ product }) => {
   const { addToCart, isInCart, getItemQuantity } = useCart();
 
   const handleAddToCart = (e) => {
-    e.preventDefault(); // Prevent navigation when clicking add to cart
+    e.preventDefault(); 
     e.stopPropagation();
     addToCart(product, 1);
   };
@@ -20,7 +19,7 @@ const ProductCard = ({ product }) => {
       to={`/product/${product.id}`}
       className="card hover:shadow-lg transition-shadow duration-300 overflow-hidden group"
     >
-      {/* Product Image */}
+
       <div className="relative aspect-square overflow-hidden bg-gray-100">
         <img
           src={product.image}
@@ -29,7 +28,7 @@ const ProductCard = ({ product }) => {
           loading="lazy"
         />
         
-        {/* Quick add to cart button */}
+       
         <button
           onClick={handleAddToCart}
           className={`absolute bottom-4 right-4 p-2 rounded-full shadow-lg transition-all duration-300 transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 ${
@@ -51,19 +50,19 @@ const ProductCard = ({ product }) => {
         </button>
       </div>
 
-      {/* Product Info */}
+
       <div className="p-4">
-        {/* Category */}
+     
         <p className="text-xs uppercase text-gray-500 font-medium tracking-wide mb-2">
           {product.category}
         </p>
 
-        {/* Title */}
+       
         <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
           {truncateText(product.title, 60)}
         </h3>
 
-        {/* Rating */}
+    
         {product.rating && (
           <div className="flex items-center mb-3">
             <div className="flex items-center">
@@ -88,7 +87,7 @@ const ProductCard = ({ product }) => {
           </div>
         )}
 
-        {/* Price */}
+        
         <div className="flex items-center justify-between">
           <span className="text-xl font-bold text-gray-900">
             {formatPrice(product.price)}

@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { useCart } from '../hooks/useCart';
 import { formatPrice, truncateText } from '../utils/validation';
 
-// Cart item component for displaying items in the shopping cart
 const CartItem = ({ item }) => {
   const { updateItemQuantity, removeFromCart, isUpdating } = useCart();
 
@@ -20,7 +19,7 @@ const CartItem = ({ item }) => {
 
   return (
     <div className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
-      {/* Product Image */}
+     
       <Link 
         to={`/product/${item.id}`}
         className="flex-shrink-0 w-20 h-20 bg-gray-100 rounded-md overflow-hidden hover:opacity-80 transition-opacity"
@@ -32,7 +31,7 @@ const CartItem = ({ item }) => {
         />
       </Link>
 
-      {/* Product Details */}
+      
       <div className="flex-1 min-w-0">
         <Link 
           to={`/product/${item.id}`}
@@ -52,9 +51,8 @@ const CartItem = ({ item }) => {
         </p>
       </div>
 
-      {/* Quantity Controls */}
       <div className="flex items-center space-x-3">
-        {/* Quantity Selector */}
+       
         <div className="flex items-center border border-gray-300 rounded">
           <button
             onClick={() => handleQuantityChange(item.quantity - 1)}
@@ -90,7 +88,7 @@ const CartItem = ({ item }) => {
           </button>
         </div>
 
-        {/* Subtotal */}
+       
         <div className="text-right min-w-[80px]">
           <p className="font-semibold text-gray-900">
             {formatPrice(subtotal)}
@@ -102,7 +100,7 @@ const CartItem = ({ item }) => {
           )}
         </div>
 
-        {/* Remove Button */}
+      
         <button
           onClick={handleRemove}
           disabled={isUpdating}

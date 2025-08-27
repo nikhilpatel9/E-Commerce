@@ -1,4 +1,4 @@
-// Error message component with retry functionality
+
 const ErrorMessage = ({ 
   message = 'Something went wrong', 
   onRetry = null, 

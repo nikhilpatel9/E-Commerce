@@ -13,16 +13,16 @@ export const validators = {
     return null;
   },
 
-  // Email validator
+ 
   email: (value) => {
-    if (!value) return null; // Only validate if value exists
+    if (!value) return null; 
     if (!emailRegex.test(value)) {
       return 'Please enter a valid email address';
     }
     return null;
   },
 
-  // Minimum length validator
+  
   minLength: (value, minLen, fieldName = 'Field') => {
     if (!value) return null;
     if (value.toString().length < minLen) {
@@ -31,7 +31,7 @@ export const validators = {
     return null;
   },
 
-  // Phone validator
+  
   phone: (value) => {
     if (!value) return null;
     if (!phoneRegex.test(value.replace(/\s/g, ''))) {
@@ -40,7 +40,7 @@ export const validators = {
     return null;
   },
 
-  // Postal code validator (basic)
+  
   postalCode: (value) => {
     if (!value) return null;
     if (value.toString().length < 3) {
@@ -50,7 +50,6 @@ export const validators = {
   }
 };
 
-// Validate single field with multiple rules
 export const validateField = (value, rules) => {
   for (const rule of rules) {
     const error = rule(value);
@@ -59,7 +58,6 @@ export const validateField = (value, rules) => {
   return null;
 };
 
-// Validate entire form
 export const validateForm = (formData, validationRules) => {
   const errors = {};
   let isValid = true;
@@ -75,7 +73,7 @@ export const validateForm = (formData, validationRules) => {
   return { isValid, errors };
 };
 
-// Checkout form validation rules
+
 export const checkoutValidationRules = {
   name: [
     (value) => validators.required(value, 'Name'),
@@ -99,7 +97,7 @@ export const checkoutValidationRules = {
   ]
 };
 
-// Format price utility
+
 export const formatPrice = (price) => {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -107,12 +105,12 @@ export const formatPrice = (price) => {
   }).format(price);
 };
 
-// Format rating
+
 export const formatRating = (rating) => {
   return Math.round(rating * 10) / 10;
 };
 
-// Truncate text utility
+
 export const truncateText = (text, maxLength = 100) => {
   if (text.length <= maxLength) return text;
   return text.substr(0, maxLength) + '...';

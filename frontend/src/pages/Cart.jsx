@@ -3,7 +3,6 @@ import { useCart } from '../hooks/useCart';
 import CartItem from '../components/CartItem';
 import { formatPrice } from '../utils/validation';
 
-// Shopping cart page component
 const Cart = () => {
   const { items, totals, isEmpty, clearAllItems, isUpdating } = useCart();
 
@@ -13,7 +12,7 @@ const Cart = () => {
     }
   };
 
-  // Empty cart state
+
   if (isEmpty) {
     return (
       <div className="text-center py-16">
@@ -46,7 +45,7 @@ const Cart = () => {
 
   return (
     <div className="max-w-4xl mx-auto">
-      {/* Page Header */}
+      
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Shopping Cart</h1>
@@ -65,14 +64,14 @@ const Cart = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Cart Items */}
+      
         <div className="lg:col-span-2 space-y-4">
           {items.map((item) => (
             <CartItem key={item.id} item={item} />
           ))}
         </div>
 
-        {/* Order Summary */}
+   
         <div className="lg:col-span-1">
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 sticky top-24">
             <h3 className="text-lg font-semibold text-gray-900 mb-6">
@@ -80,7 +79,7 @@ const Cart = () => {
             </h3>
             
             <div className="space-y-4">
-              {/* Subtotal */}
+              
               <div className="flex items-center justify-between">
                 <span className="text-gray-600">
                   Subtotal ({totals.itemCount} {totals.itemCount === 1 ? 'item' : 'items'})
@@ -90,7 +89,7 @@ const Cart = () => {
                 </span>
               </div>
 
-              {/* Shipping */}
+            
               <div className="flex items-center justify-between">
                 <span className="text-gray-600">Shipping</span>
                 <span className="font-medium text-gray-900">
@@ -102,7 +101,7 @@ const Cart = () => {
                 </span>
               </div>
 
-              {/* Tax */}
+              
               <div className="flex items-center justify-between">
                 <span className="text-gray-600">Tax</span>
                 <span className="font-medium text-gray-900">
@@ -110,10 +109,10 @@ const Cart = () => {
                 </span>
               </div>
 
-              {/* Divider */}
+            
               <hr className="my-4" />
 
-              {/* Total */}
+          
               <div className="flex items-center justify-between text-lg font-bold">
                 <span className="text-gray-900">Total</span>
                 <span className="text-gray-900">
@@ -121,7 +120,7 @@ const Cart = () => {
                 </span>
               </div>
 
-              {/* Free shipping notice */}
+              
               {totals.subtotal < 50 && (
                 <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg">
                   <p className="text-sm text-blue-800">
@@ -139,7 +138,7 @@ const Cart = () => {
                 </div>
               )}
 
-              {/* Action Buttons */}
+              
               <div className="space-y-3 pt-6">
                 <Link
                   to="/checkout"
@@ -156,7 +155,7 @@ const Cart = () => {
                 </Link>
               </div>
 
-              {/* Security Notice */}
+             
               <div className="flex items-start space-x-2 text-sm text-gray-600 pt-4">
                 <svg className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>

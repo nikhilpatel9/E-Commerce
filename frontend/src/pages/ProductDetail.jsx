@@ -18,12 +18,12 @@ const ProductDetail = () => {
   const [imageLoading, setImageLoading] = useState(true);
   const [addToCartSuccess, setAddToCartSuccess] = useState(false);
 
-  // Add to recently viewed when product loads
+
   useEffect(() => {
-    if (product) {
+    if (product?.id) {
       addToRecentlyViewed(product);
     }
-  }, [product, addToRecentlyViewed]);
+  }, [product?.id]);
 
   const handleAddToCart = async () => {
     await addToCart(product, quantity);
@@ -35,12 +35,10 @@ const ProductDetail = () => {
     setQuantity(Math.min(Math.max(1, newQuantity), 5));
   };
 
-  // Show loading state
   if (loading) {
     return <LoadingSpinner size="lg" message="Loading product details..." />;
   }
 
-  // Show error state
   if (error || !product) {
     return (
       <ErrorMessage 
@@ -55,7 +53,7 @@ const ProductDetail = () => {
 
   return (
     <div className="max-w-7xl mx-auto">
-      {/* Breadcrumb */}
+  
       <nav className="flex items-center space-x-2 text-sm text-gray-600 mb-8">
         <Link to="/" className="hover:text-blue-600 transition-colors">
           Home
@@ -73,7 +71,7 @@ const ProductDetail = () => {
       </nav>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {/* Product Image */}
+      
         <div className="space-y-4">
           <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden relative">
             {imageLoading && (
@@ -93,21 +91,21 @@ const ProductDetail = () => {
           </div>
         </div>
 
-        {/* Product Information */}
+      
         <div className="space-y-6">
-          {/* Category */}
+         
           <div className="flex items-center space-x-2">
             <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium capitalize">
               {product.category}
             </span>
           </div>
 
-          {/* Title */}
+        
           <h1 className="text-3xl font-bold text-gray-900 leading-tight">
             {product.title}
           </h1>
 
-          {/* Rating */}
+        
           {product.rating && (
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-1">
@@ -132,14 +130,14 @@ const ProductDetail = () => {
             </div>
           )}
 
-          {/* Price */}
+         
           <div className="space-y-2">
             <span className="text-4xl font-bold text-gray-900">
               {formatPrice(product.price)}
             </span>
           </div>
 
-          {/* Description */}
+          
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-gray-900">Description</h3>
             <p className="text-gray-700 leading-relaxed">
@@ -147,9 +145,9 @@ const ProductDetail = () => {
             </p>
           </div>
 
-          {/* Add to Cart Section */}
+          
           <div className="space-y-4 p-6 bg-gray-50 rounded-lg">
-            {/* Quantity Selector */}
+         
             <div className="flex items-center space-x-4">
               <label className="font-medium text-gray-900">Quantity:</label>
               <div className="flex items-center border border-gray-300 rounded-lg">
@@ -187,7 +185,7 @@ const ProductDetail = () => {
               </div>
             </div>
 
-            {/* Add to Cart Button */}
+          
             <div className="flex space-x-4">
               <button
                 onClick={handleAddToCart}
@@ -228,7 +226,7 @@ const ProductDetail = () => {
               </Link>
             </div>
 
-            {/* Cart Status */}
+           
             {inCart && (
               <div className="flex items-center space-x-2 text-sm text-green-700 bg-green-50 p-3 rounded-lg">
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -239,7 +237,7 @@ const ProductDetail = () => {
             )}
           </div>
 
-          {/* Additional Info */}
+         
           <div className="space-y-4 text-sm text-gray-600">
             <div className="flex items-center space-x-2">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

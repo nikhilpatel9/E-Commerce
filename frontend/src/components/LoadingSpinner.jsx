@@ -1,4 +1,4 @@
-// Loading spinner component with customizable size and message
+
 const LoadingSpinner = ({ size = 'md', message = 'Loading...', className = '' }) => {
   const sizeClasses = {
     sm: 'w-4 h-4',

@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../hooks/useCart';
 import { validateForm, checkoutValidationRules, formatPrice } from '../utils/validation';
 
-// Checkout page component
 const Checkout = () => {
   const { items, totals, isEmpty, clearAllItems } = useCart();
   const navigate = useNavigate();
@@ -21,7 +20,6 @@ const Checkout = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
 
-  // Redirect if cart is empty
   if (isEmpty && !orderPlaced) {
     return (
       <div className="text-center py-16">
@@ -45,7 +43,6 @@ const Checkout = () => {
       [name]: value
     }));
     
-    // Clear error for this field when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -57,7 +54,7 @@ const Checkout = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Validate form
+
     const { isValid, errors: validationErrors } = validateForm(formData, checkoutValidationRules);
     
     if (!isValid) {
@@ -68,14 +65,12 @@ const Checkout = () => {
     setIsSubmitting(true);
     
     try {
-      // Simulate API call
+   
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Clear cart and show success
+   
       await clearAllItems();
       setOrderPlaced(true);
       
-      // Redirect to home after 3 seconds
       setTimeout(() => {
         navigate('/');
       }, 3000);
@@ -88,7 +83,6 @@ const Checkout = () => {
     }
   };
 
-  // Order confirmation screen
   if (orderPlaced) {
     return (
       <div className="text-center py-16">
@@ -123,7 +117,7 @@ const Checkout = () => {
 
   return (
     <div className="max-w-4xl mx-auto">
-      {/* Page Header */}
+      
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900">Checkout</h1>
         <p className="text-gray-600 mt-2">
@@ -132,9 +126,9 @@ const Checkout = () => {
       </div>
 
       <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Checkout Form */}
+    
         <div className="lg:col-span-2 space-y-8">
-          {/* Contact Information */}
+         
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
             <h3 className="text-lg font-semibold text-gray-900 mb-6">
               Contact Information
@@ -181,7 +175,7 @@ const Checkout = () => {
             </div>
           </div>
 
-          {/* Shipping Information */}
+   
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
             <h3 className="text-lg font-semibold text-gray-900 mb-6">
               Shipping Address
@@ -249,7 +243,7 @@ const Checkout = () => {
             </div>
           </div>
 
-          {/* Payment Method */}
+      
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
             <h3 className="text-lg font-semibold text-gray-900 mb-6">
               Payment Method
@@ -289,14 +283,13 @@ const Checkout = () => {
           </div>
         </div>
 
-        {/* Order Summary */}
         <div className="lg:col-span-1">
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 sticky top-24">
             <h3 className="text-lg font-semibold text-gray-900 mb-6">
               Order Summary
             </h3>
             
-            {/* Items */}
+          
             <div className="space-y-3 mb-6">
               {items.map((item) => (
                 <div key={item.id} className="flex items-center space-x-3">
@@ -320,7 +313,6 @@ const Checkout = () => {
               ))}
             </div>
 
-            {/* Totals */}
             <div className="space-y-3 border-t border-gray-200 pt-4">
               <div className="flex justify-between">
                 <span className="text-gray-600">Subtotal</span>
@@ -342,7 +334,7 @@ const Checkout = () => {
               </div>
             </div>
 
-            {/* Place Order Button */}
+           
             <button
               type="submit"
               disabled={isSubmitting}
@@ -363,7 +355,7 @@ const Checkout = () => {
               )}
             </button>
 
-            {/* Security Notice */}
+            
             <div className="flex items-start space-x-2 text-sm text-gray-600 mt-4">
               <svg className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>

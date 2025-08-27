@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-// Custom hook for localStorage management
 export const useLocalStorage = (key, initialValue) => {
-  // Get value from localStorage or use initial value
+ 
   const [storedValue, setStoredValue] = useState(() => {
     try {
       const item = window.localStorage.getItem(key);
@@ -13,19 +12,20 @@ export const useLocalStorage = (key, initialValue) => {
     }
   });
 
-  // Update localStorage when value changes
-  const setValue = (value) => {
+  useEffect(() => {
     try {
-      // Allow value to be a function so we have the same API as useState
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
-      setStoredValue(valueToStore);
-      window.localStorage.setItem(key, JSON.stringify(valueToStore));
+      window.localStorage.setItem(key, JSON.stringify(storedValue));
     } catch (error) {
       console.error(`Error setting localStorage key "${key}":`, error);
     }
+  }, [key, storedValue]);
+
+  const setValue = (value) => {
+    setStoredValue(prev =>
+      value instanceof Function ? value(prev) : value
+    );
   };
 
-  // Remove item from localStorage
   const removeValue = () => {
     try {
       window.localStorage.removeItem(key);
@@ -38,15 +38,12 @@ export const useLocalStorage = (key, initialValue) => {
   return [storedValue, setValue, removeValue];
 };
 
-// Hook for managing recently viewed products
 export const useRecentlyViewed = () => {
   const [recentlyViewed, setRecentlyViewed] = useLocalStorage('recentlyViewed', []);
 
   const addToRecentlyViewed = (product) => {
     setRecentlyViewed(prev => {
-      // Remove if already exists
       const filtered = prev.filter(item => item.id !== product.id);
-      // Add to beginning and keep only last 5 items
       return [product, ...filtered].slice(0, 5);
     });
   };
@@ -55,20 +52,16 @@ export const useRecentlyViewed = () => {
     setRecentlyViewed([]);
   };
 
-  return {
-    recentlyViewed,
-    addToRecentlyViewed,
-    clearRecentlyViewed
-  };
+  return { recentlyViewed, addToRecentlyViewed, clearRecentlyViewed };
 };
 
-// Hook for managing user preferences
+
 export const useUserPreferences = () => {
   const [preferences, setPreferences] = useLocalStorage('userPreferences', {
     theme: 'light',
     currency: 'USD',
     itemsPerPage: 20,
-    defaultView: 'grid' // grid or list
+    defaultView: 'grid'
   });
 
   const updatePreference = (key, value) => {
@@ -87,9 +80,5 @@ export const useUserPreferences = () => {
     });
   };
 
-  return {
-    preferences,
-    updatePreference,
-    resetPreferences
-  };
+  return { preferences, updatePreference, resetPreferences };
 };

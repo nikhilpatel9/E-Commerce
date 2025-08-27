@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { cachedApi } from '../utils/api';
 
-// Custom hook for fetching and managing products data
 export const useProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -32,7 +31,6 @@ export const useProducts = () => {
   };
 };
 
-// Custom hook for fetching single product
 export const useProduct = (id) => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -65,7 +63,6 @@ export const useProduct = (id) => {
   };
 };
 
-// Custom hook for fetching categories
 export const useCategories = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -96,7 +93,7 @@ export const useCategories = () => {
   };
 };
 
-// Custom hook for filtering products
+
 export const useProductFilter = (products) => {
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [searchTerm, setSearchTerm] = useState('');
@@ -105,7 +102,6 @@ export const useProductFilter = (products) => {
   useEffect(() => {
     let filtered = products;
 
-    // Filter by search term
     if (searchTerm) {
       filtered = filtered.filter(product =>
         product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -113,7 +109,7 @@ export const useProductFilter = (products) => {
       );
     }
 
-    // Filter by category
+   
     if (selectedCategory) {
       filtered = filtered.filter(product => product.category === selectedCategory);
     }

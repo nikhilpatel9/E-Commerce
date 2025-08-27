@@ -1,20 +1,20 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-// Cart store using Zustand for global state management
+
 const useCartStore = create(
   persist(
     (set, get) => ({
-      // Initial state
+      
       items: [],
       
-      // Add item to cart
+      
       addItem: (product, quantity = 1) => {
         set((state) => {
           const existingItem = state.items.find(item => item.id === product.id);
           
           if (existingItem) {
-            // Update quantity if item already exists
+            
             return {
               items: state.items.map(item =>
                 item.id === product.id
@@ -23,7 +23,7 @@ const useCartStore = create(
               )
             };
           } else {
-            // Add new item to cart
+            
             return {
               items: [...state.items, { 
                 ...product, 
@@ -41,7 +41,6 @@ const useCartStore = create(
         }));
       },
 
-      // Update item quantity
       updateQuantity: (productId, quantity) => {
         if (quantity <= 0) {
           get().removeItem(productId);
@@ -57,20 +56,20 @@ const useCartStore = create(
         }));
       },
 
-      // Clear entire cart
+ 
       clearCart: () => {
         set({ items: [] });
       },
 
-      // Get cart totals
+      
       getTotals: () => {
         const state = get();
         const subtotal = state.items.reduce((total, item) => {
           return total + (item.price * item.quantity);
         }, 0);
         
-        const tax = subtotal * 0.1; // 10% tax
-        const shipping = subtotal > 50 ? 0 : 5.99; // Free shipping over $50
+        const tax = subtotal * 0.1; 
+        const shipping = subtotal > 50 ? 0 : 5.99; 
         const total = subtotal + tax + shipping;
 
         return {
@@ -82,19 +81,18 @@ const useCartStore = create(
         };
       },
 
-      // Get item count
+     
       getItemCount: () => {
         const state = get();
         return state.items.reduce((count, item) => count + item.quantity, 0);
       },
 
-      // Check if product is in cart
       isInCart: (productId) => {
         const state = get();
         return state.items.some(item => item.id === productId);
       },
 
-      // Get item quantity in cart
+ 
       getItemQuantity: (productId) => {
         const state = get();
         const item = state.items.find(item => item.id === productId);
@@ -102,8 +100,8 @@ const useCartStore = create(
       }
     }),
     {
-      name: 'cart-storage', // localStorage key
-      getStorage: () => localStorage, // Use localStorage for persistence
+      name: 'cart-storage', 
+      getStorage: () => localStorage, 
     }
   )
 );

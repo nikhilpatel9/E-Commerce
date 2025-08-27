@@ -3,8 +3,6 @@ import { useProductFilter } from '../hooks/useProducts';
 import ProductCard from '../components/ProductCard';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorMessage from '../components/ErrorMessage';
-
-// Home page component displaying product listing with search and filter
 const Home = () => {
   const { products, loading: productsLoading, error: productsError, refetch: refetchProducts } = useProducts();
   const { categories, loading: categoriesLoading } = useCategories();
@@ -18,12 +16,10 @@ const Home = () => {
     clearFilters
   } = useProductFilter(products);
 
-  // Show loading state
   if (productsLoading) {
     return <LoadingSpinner size="lg" message="Loading products..." />;
   }
 
-  // Show error state
   if (productsError) {
     return (
       <ErrorMessage 
@@ -38,7 +34,7 @@ const Home = () => {
 
   return (
     <div className="space-y-6">
-      {/* Page Header */}
+      
       <div className="text-center">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
           Discover Amazing Products
@@ -48,10 +44,10 @@ const Home = () => {
         </p>
       </div>
 
-      {/* Search and Filter Section */}
+      
       <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
         <div className="flex flex-col md:flex-row gap-4 items-center">
-          {/* Search Input */}
+          
           <div className="flex-1 relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -77,7 +73,6 @@ const Home = () => {
             )}
           </div>
 
-          {/* Category Filter */}
           <div className="w-full md:w-64">
             <select
               value={selectedCategory}
@@ -94,7 +89,6 @@ const Home = () => {
             </select>
           </div>
 
-          {/* Clear Filters Button */}
           {hasActiveFilters && (
             <button
               onClick={clearFilters}
@@ -105,7 +99,6 @@ const Home = () => {
           )}
         </div>
 
-        {/* Results Summary */}
         <div className="mt-4 flex items-center justify-between text-sm text-gray-600">
           <div>
             Showing <span className="font-medium">{resultCount}</span> of{' '}
@@ -119,7 +112,6 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Products Grid */}
       {resultCount === 0 ? (
         <div className="text-center py-12">
           <svg className="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -1,6 +1,5 @@
 const BASE_URL = 'https://fakestoreapi.com';
 
-// Generic API request handler with error handling
 const apiRequest = async (url) => {
   try {
     const response = await fetch(`${BASE_URL}${url}`);
@@ -14,36 +13,33 @@ const apiRequest = async (url) => {
   }
 };
 
-// Products API
+
 export const api = {
-  // Get all products
+ 
   getProducts: () => apiRequest('/products'),
   
-  // Get single product by ID
+
   getProduct: (id) => apiRequest(`/products/${id}`),
   
-  // Get all categories
+  
   getCategories: () => apiRequest('/products/categories'),
   
-  // Get products by category
+  
   getProductsByCategory: (category) => apiRequest(`/products/category/${category}`),
   
-  // Get limited products (for pagination if needed)
   getLimitedProducts: (limit = 20) => apiRequest(`/products?limit=${limit}`),
 };
 
-// Cache management
+
 export const cache = {
-  // In-memory cache
+  
   data: new Map(),
   
-  // Set cache with expiration (default 5 minutes)
   set: (key, data, ttl = 5 * 60 * 1000) => {
     const expiry = Date.now() + ttl;
     cache.data.set(key, { data, expiry });
   },
   
-  // Get from cache if not expired
   get: (key) => {
     const cached = cache.data.get(key);
     if (!cached) return null;
@@ -56,13 +52,12 @@ export const cache = {
     return cached.data;
   },
   
-  // Clear all cache
+  
   clear: () => {
     cache.data.clear();
   }
 };
 
-// Cached API requests
 export const cachedApi = {
   getProducts: async () => {
     const cacheKey = 'products';
