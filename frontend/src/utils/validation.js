@@ -1,15 +1,11 @@
-// Validation utilities for forms
 
-// Email validation regex
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// Phone validation regex (basic)
 // eslint-disable-next-line no-useless-escape
 const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
 
-// Validation rules
 export const validators = {
-  // Required field validator
+
   required: (value, fieldName = 'Field') => {
     if (!value || value.toString().trim() === '') {
       return `${fieldName} is required`;
