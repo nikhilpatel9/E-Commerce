@@ -79,6 +79,7 @@ src/
    ```bash
    git clone <repository-url>
    cd mini-ecommerce
+   cd .\frontend
    ```
 
 2. **Install dependencies**
@@ -92,7 +93,7 @@ src/
    ```
 
 4. **Open your browser**
-   Navigate to `http://localhost:3000`
+   Navigate to `http://localhost:5173`
 
 ### Build for Production
 
@@ -220,17 +221,6 @@ The application integrates with the [Fake Store API](https://fakestoreapi.com/) 
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 📞 Support
-
-If you encounter any issues or have questions, please:
-- Check the existing issues in the repository
-- Create a new issue with detailed information
-- Contact the development team
-
----
 
 **Happy Shopping! 🛒**
